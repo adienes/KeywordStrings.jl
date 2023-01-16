@@ -23,6 +23,10 @@ using Test
     @test kw"$x$y" % (; x = 0, y = 1) === "01"
     @test kw"$x$y" % (; x = 0) % (; y = 1) === "01"
 
+    # broadcasting works
+    @test kw"$x" .% ((; x=0), (; x=1)) === ("0", "1")
+    @test ((; x=0, y=0), (; x=1, y=1)) .% kw"$x$y" === ("00", "11")
+
     # cannot convert to string before finalizing all formatting
     @test_throws KeywordStrings.KeywordStringsError string(kw"$undefinedvar")
 

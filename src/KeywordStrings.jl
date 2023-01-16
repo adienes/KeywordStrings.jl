@@ -136,6 +136,8 @@ function mul(_kws_1::KeywordString, kws_2::KeywordString)
     return kws_1
 end
 
+Broadcast.broadcastable(kws::KeywordString) = Ref(kws)
+
 %(kws::KeywordString, fmt) = format(kws, fmt)
 %(fmt, kws::KeywordString) = format(kws, fmt)
 
